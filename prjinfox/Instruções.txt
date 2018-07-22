@@ -1,4 +1,5 @@
-
+Identar código alt+shift+F
 Necessário instalar o conector JAVA para MySQL
 No Workbench NetBeans selecionar biblioteca, clicar com o botão direito e selecionar "adicionar jar/pasta"
 "Selecionar o conector correspondente ao BD"
+Cada classe que fizer uso do bd deverá utilizar o import
