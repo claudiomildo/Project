@@ -1,4 +1,5 @@
-Identar código alt+shift+F
+Identar código: alt+shift+F
+Try-Catch: ctrl+space
 
 Icones: https://www.iconfinder.com/
 

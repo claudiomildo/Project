@@ -4,16 +4,48 @@
  * and open the template in the editor.
  */
 package br.com.infox.telas;
+
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao; //Importar o pacote referente a conexão
+import javax.swing.JOptionPane;
+
+
 /**
  *
  * @author claud
  */
 public class TelaLogin extends javax.swing.JFrame {
-Connection conexao = null; // variavel criada no módulo de conexão
-PreparedStatement pst = null; //pst rs executará as instruções do bd
-ResultSet rs = null;
+
+    //Variáveis serão utilizadas em todos os forms
+    Connection conexao = null; // variável criada no módulo de conexão
+    PreparedStatement pst = null; //pst é uma forma de você fazer uma inserção no banco mais segura do bd
+    ResultSet rs = null;
+
+    public void logar() {
+
+        String sql = "select * from tbusuario where login=? and senha=?"; //? serão subistituidos pelo valor da variável
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, txtUsuario.getText());
+            String Senha;
+            Senha = String.valueOf(txtSenha.getPassword());
+           // String Senha = String.valueOf(2, txtSenha.getPassword());
+            //pst.setString(2, txtSenha.getPassword());
+            rs = pst.executeQuery();  //rs receberá os valores do pst para executar a query
+
+            if (rs.next()) { //condicional responsável por liberar acesso a tela principal
+                TelaPrincipal principal = new TelaPrincipal();
+                principal.setVisible(true);
+
+            } else {
+                JOptionPane.showMessageDialog(null, " Usuário ou senha invalidos ");
+            }
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
     /**
      * Creates new form TelaLogin
      */
@@ -21,7 +53,7 @@ ResultSet rs = null;
         initComponents();
         conexao = ModuloConexao.conector();
         //System.out.println(conexao); //sout+ctrl+space
-        if(conexao != null){
+        if (conexao != null) {
             lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/Web_Database.png")));
         } else {
             lblStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/infox/icones/remove-from-database.png")));
@@ -39,8 +71,8 @@ ResultSet rs = null;
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtUsuario = new javax.swing.JTextField();
+        txtSenha = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
         lblStatus = new javax.swing.JLabel();
 
@@ -53,6 +85,11 @@ ResultSet rs = null;
         jLabel2.setText("Usuário");
 
         btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         lblStatus.setText("Status");
 
@@ -73,8 +110,8 @@ ResultSet rs = null;
                         .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLogin))
                 .addGap(32, 32, 32))
         );
@@ -84,11 +121,11 @@ ResultSet rs = null;
                 .addContainerGap(67, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin)
@@ -96,9 +133,14 @@ ResultSet rs = null;
                 .addGap(6, 6, 6))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(391, 239));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        // TODO add your handling code here:
+        logar();
+    }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -139,8 +181,8 @@ ResultSet rs = null;
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblStatus;
+    private javax.swing.JPasswordField txtSenha;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
