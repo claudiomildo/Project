@@ -1,6 +1,8 @@
 Identar código: alt+shift+F
 Try-Catch: ctrl+space
 
+Dispose: fecha a tela sem fechar o sistema por inteiro
+
 Icones: https://www.iconfinder.com/
 
 Necessário instalar o conector JAVA para MySQL
