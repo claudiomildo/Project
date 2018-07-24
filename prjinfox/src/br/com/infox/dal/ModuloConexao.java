@@ -19,7 +19,7 @@ public class ModuloConexao { //Módulo responsável por estabelecer a conexão c
                     conexao = DriverManager.getConnection(url, user, password);
                     return conexao;
         }catch (Exception e){
-            //System.out.println(e);
+            System.out.println(e);
            return null;
         }
     }
