@@ -7,8 +7,8 @@ package br.com.infox.telas;
 
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao; //Importar o pacote referente a conexão
+import java.awt.Color;
 import javax.swing.JOptionPane;
-
 
 /**
  *
@@ -30,18 +30,30 @@ public class TelaLogin extends javax.swing.JFrame {
             pst.setString(2, txtSenha.getText());
             rs = pst.executeQuery();  //rs receberá os valores do pst para executar a query
             if (rs.next()) { //condicional responsável por liberar acesso a tela principal
-                TelaPrincipal principal = new TelaPrincipal();
-                principal.setVisible(true);
-                this.dispose(); //ao chamar a tela principal será fechada a tela de login
+                String perfil = rs.getString(6);//obtem o conteudo do bd
+                if (perfil.equals("admin")) {   // Aplicando restrições de adm e user
+                    TelaPrincipal principal = new TelaPrincipal();
+                    principal.setVisible(true);
+                    TelaPrincipal.menRel.setEnabled(true);
+                    TelaPrincipal.menCadUsu.setEnabled(true);
+                    TelaPrincipal.lblUsuario.setText(rs.getString(2)); //exibe informação do bd na tela principal
+                    TelaPrincipal.lblUsuario.setForeground(Color.red);
+                    this.dispose(); //ao chamar a tela principal será fechada a tela de login
+                } else {
+                    TelaPrincipal principal = new TelaPrincipal();
+                    principal.setVisible(true);
+                    TelaPrincipal.lblUsuario.setText(rs.getString(2)); //exibe informação do bd na tela principal
+
+                    this.dispose();
+                }
                 conexao.close();
             } else {
-                JOptionPane.showMessageDialog(null, " Usuário ou senha invalidos ");
+                JOptionPane.showMessageDialog(null, " Usuário ou senha inválidos ");
             }
         } catch (Exception e) {
-
             JOptionPane.showMessageDialog(null, e);
         }
-   }
+    }
 
     /**
      * Creates new form TelaLogin
