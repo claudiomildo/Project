@@ -93,7 +93,8 @@ public class TelaLogin extends javax.swing.JFrame {
 
         jLabel2.setText("Usuário");
 
-        btnLogin.setText("Login");
+        btnLogin.setText("LOGAR");
+        btnLogin.setToolTipText("Realizar Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);

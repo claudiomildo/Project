@@ -1,7 +1,9 @@
 Identar código: alt+shift+F
 Try-Catch: ctrl+space
 
-Dispose() fecha a tela sem fechar o sistema por inteiro
+Swing: Classe especial que trata da parte gráfica
+
+Dispose() Fecha a tela sem fechar o sistema por inteiro
 
 Icones: https://www.iconfinder.com/
 
