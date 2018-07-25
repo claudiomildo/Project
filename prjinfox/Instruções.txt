@@ -1,7 +1,12 @@
+                                  M.V.C
+
 Identar código: alt+shift+F
+ifel: ctrl+space
 Try-Catch: ctrl+space
 
 Swing: Classe especial que trata da parte gráfica
+
+Form que se sobrepõem; Form JInternalFrame
 
 Dispose() Fecha a tela sem fechar o sistema por inteiro
 

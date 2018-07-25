@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 public class TelaLogin extends javax.swing.JFrame {
 
-    //Variáveis serão utilizadas em todos os forms
+    //Variáveis que serão utilizadas em todos os forms
     Connection conexao = null; // variável criada no módulo de conexão
     PreparedStatement pst = null; //pst é uma forma de você fazer uma inserção no banco mais segura do bd
     ResultSet rs = null;
