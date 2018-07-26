@@ -54,10 +54,12 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             pst.setString(4, txtUsuLogin.getText());
             pst.setString(5, txtUsuSenha.getText());
             pst.setString(6, cboUsuPerfil.getText());
-            if ((txtUsuId.getText().isEmpty()) || (txtUsuNome.getText().isEmpty()) || (txtUsuFone.getText().isEmpty())
+            if ((txtUsuId.getText().isEmpty()) 
+                    || (txtUsuNome.getText().isEmpty()) 
                     || (txtUsuLogin.getText().isEmpty())
                     || (txtUsuSenha.getText().isEmpty()) //Estrutura para validar campos obrigatorios
-                    || (cboUsuPerfil.getText().isEmpty())) {
+                    || (cboUsuPerfil.getText().isEmpty())
+                ) {
                 JOptionPane.showMessageDialog(null, "Preencher Todos os Campos Obrigatórios");
             } else {
 
@@ -108,7 +110,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
         jLabel2.setText("* Nome");
 
-        jLabel3.setText("* Fone");
+        jLabel3.setText(" Fone");
 
         jLabel4.setText("* Senha");
 
@@ -162,12 +164,11 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                         .addGap(57, 57, 57)
                         .addComponent(btnUsuDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel2))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -187,7 +188,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtUsuId, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
