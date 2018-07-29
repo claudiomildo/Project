@@ -1,0 +1,41 @@
+                                  M.V.C
+
+
+Identar código: alt+shift+F
+ifel: ctrl+space
+
+Try-Catch:ctrl+space
+
+SourceForge para projetos open source
+
+Linnk tabela inteligente://sourceforge.net/projects/finalangelsanddemons/?source=typ_redirect
+
+
+
+Swing: Classe especial que trata da parte gráfica
+
+
+
+Quando o Java reclamar de converter para string colocar .toString()
+
+Form que se sobrepõem; Form JInternalFrame
+
+
+
+Dispose() Fecha a tela sem fechar o sistema por inteiro
+
+
+
+Icones: https://www.iconfinder.com/
+
+
+Necessário instalar o conector JAVA para MySQL
+
+No Workbench NetBeans selecionar biblioteca, clicar com o botão direito e selecionar "adicionar jar/pasta"
+
+"Selecionar o conector correspondente ao BD"
+
+Cada classe que fizer uso do bd deverá utilizar o import correspondente.
+
+
+
