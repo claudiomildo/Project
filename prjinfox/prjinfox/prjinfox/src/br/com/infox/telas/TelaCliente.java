@@ -3,6 +3,7 @@ package br.com.infox.telas;
 import java.sql.*;
 import br.com.infox.dal.ModuloConexao; //Importar o pacote referente a conexão
 import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 
 public class TelaCliente extends javax.swing.JInternalFrame {
 
@@ -37,6 +38,18 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 txtCliFone.setText(null);//Linhas responsáveis por limpar os campos já preenchidos que não estão cadastrados
                 txtCliEmail.setText(null);
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    private void pesquisar() {
+        String sql = "select * from tbclientes nomecli like=?";  //sql, variável onde será armazenada o valor da consulta
+        try {
+            pst = conexao.prepareStatement(sql);  //passando o conteudo da caixa de pesquisa para o ?
+            pst.setString(1, txtCliPesquisar.getText());
+            rs = pst.executeQuery();
+            tblClientes.setModel(DbUtils.resultSetToTableModel(rs)); //biblioteca rs2xml ira prencher a tabela
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
