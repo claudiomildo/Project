@@ -62,6 +62,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         txtCliEndereco.setText(tblClientes.getModel().getValueAt(setar, 2).toString());
         txtCliFone.setText(tblClientes.getModel().getValueAt(setar, 3).toString());
         txtCliEmail.setText(tblClientes.getModel().getValueAt(setar, 4).toString());
+        btnCadastrar.setEnabled(false); // Desabilitar o botão add para não recadastrar o mesmo cliente
     }
 
     private void alterar() {
@@ -84,6 +85,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 txtCliEndereco.setText(null);
                 txtCliFone.setText(null);//Linhas responsáveis por limpar os campos já preenchidos que não estão cadastrados
                 txtCliEmail.setText(null);
+                btnCadastrar.setEnabled(true);// realiza a alteração e reabilita o botão cadastrar
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
