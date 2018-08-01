@@ -37,6 +37,37 @@ public class TelaOs extends javax.swing.JInternalFrame {
         // btnOsAdicionar.setEnabled(false); // Desabilitar o botão add para não recadastrar o mesmo cliente
     }
 
+    private void emitir_os() {
+        String sql = "insert into tbos(tipo,situacao,equipamento,defeito,servico,tecnico,valor,idcli)values(?,?,?,?,?,?,?,?)";
+        try {
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, tipo);
+            pst.setString(2, cboOsSit.getSelectedItem().toString()); //Linhas responsáveis por coletar e armazenar as informações
+            pst.setString(3, txtOsEquip.getText());
+            pst.setString(4, txtOsDef.getText());
+            pst.setString(5, txtOsServ.getText());
+            pst.setString(6, txtOsTec.getText());
+            pst.setString(7, txtOsValor.getText().replace(",",".")); // subistitui a , pelo .
+            pst.setString(8, txtCliId.getText());
+            if ((txtCliId.getText().isEmpty()) || (txtOsEquip.getText().isEmpty()) || (txtOsDef.getText().isEmpty())) {// Validação dos campos obrigatórios
+                JOptionPane.showMessageDialog(null, "Preencher Todos os Campos Obrigatórios");
+            } else {
+                int adicionado = pst.executeUpdate();
+                if (adicionado > 0) {
+                    JOptionPane.showMessageDialog(null, "Os Emitidas com Sucesso");
+                }
+                txtCliId.setText(null);
+                txtOsEquip.setText(null);
+                txtOsDef.setText(null);//Linhas responsáveis por limpar os campos já preenchidos que não estão cadastrados
+                txtOsServ.setText(null);
+                txtOsTec.setText(null);
+                txtOsValor.setText(null);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -164,7 +195,7 @@ public class TelaOs extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Situação");
 
-        cboOsSit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Entrega OK", "Orçamento Reprovado", "Aguardando Aprovação", "Aguardando Peças", "Abandonado pelo Cliente", "Na bancada", "Retornou" }));
+        cboOsSit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Na Bancada", "Entrega OK", "Orçamento Reprovado", "Aguardando Aprovação", "Aguardando Peças", "Abandonado pelo Cliente", "Retornou" }));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Cliente"));
 
@@ -237,6 +268,8 @@ public class TelaOs extends javax.swing.JInternalFrame {
 
         jLabel10.setText("Valor Total");
 
+        txtOsValor.setText("0");
+
         btnosImprimir.setText("IMP/OS");
         btnosImprimir.setToolTipText("Imprimir OS");
         btnosImprimir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -244,6 +277,11 @@ public class TelaOs extends javax.swing.JInternalFrame {
 
         btnOsAdicionar.setText("CADASTRAR");
         btnOsAdicionar.setPreferredSize(new java.awt.Dimension(105, 23));
+        btnOsAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOsAdicionarActionPerformed(evt);
+            }
+        });
 
         btnOsExcluir.setText("EXCLUIR");
         btnOsExcluir.setPreferredSize(new java.awt.Dimension(105, 23));
@@ -321,9 +359,7 @@ public class TelaOs extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel7)
-                        .addGap(43, 43, 43)
-                        .addComponent(jLabel9))
+                        .addComponent(jLabel7))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtOsEquip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(9, 9, 9)
@@ -336,7 +372,8 @@ public class TelaOs extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtOsTec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10)
-                            .addComponent(txtOsValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtOsValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))))
                 .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnosImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -359,16 +396,20 @@ public class TelaOs extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblClientesMouseClicked
 
     private void rbtOrcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtOrcActionPerformed
-       tipo = "Orçamento";
+        tipo = "Orçamento";
     }//GEN-LAST:event_rbtOrcActionPerformed
 
     private void rbtOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtOsActionPerformed
-       tipo = "OS";
+        tipo = "OS";
     }//GEN-LAST:event_rbtOsActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-         rbtOrc.setSelected(true);// Ao abrir o form marca o radioButton orc e seta no bd
+        rbtOrc.setSelected(true);// Ao abrir o form marca o radioButton orc e seta no bd
     }//GEN-LAST:event_formInternalFrameOpened
+
+    private void btnOsAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOsAdicionarActionPerformed
+        emitir_os();
+    }//GEN-LAST:event_btnOsAdicionarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
