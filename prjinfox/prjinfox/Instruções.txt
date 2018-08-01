@@ -39,5 +39,5 @@ Cada classe que fizer uso do bd deverá utilizar o import correspondente.
 
 
 
-tratar tryCatch os sobre erro mysql
+***tratar tryCatch os sobre erro mysql
 
