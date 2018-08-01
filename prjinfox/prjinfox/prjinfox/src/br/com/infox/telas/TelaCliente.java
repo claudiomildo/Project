@@ -47,7 +47,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         String sql = "select * from tbclientes where nomecli like ?";  //sql, variável onde será armazenada o valor da consulta
         try {
             pst = conexao.prepareStatement(sql);  //passando o conteudo da caixa de pesquisa para o ?
-            pst.setString(1, txtCliPesquisar.getText() + "%");  //% continuação da string sql
+            pst.setString(1, txtCliPesquisar.getText() + "%");  //% continuação da instrução sql
             rs = pst.executeQuery();
             tblClientes.setModel(DbUtils.resultSetToTableModel(rs)); //biblioteca rs2xml ira prencher a tabela
         } catch (Exception e) {
